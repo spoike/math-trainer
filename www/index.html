@@ -20,14 +20,15 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">Math Challenge</a>
+        <a class="navbar-brand" href="javascript:void(0)">Math Challenge</a>
       </div>
     </div>
   </div>
 
   <div class="container">
 
-    <!-- ko template: { name: 'game-template', afterRender: initFocus } --><!-- /ko -->
+    <!-- ko template: { name: 'main-menu-template', 'if': !isPlaying() } --><!-- /ko -->
+    <!-- ko template: { name: 'game-template', data: terms, 'if': isPlaying, afterRender: initFocus } --><!-- /ko -->
 
     <hr>
 
@@ -36,9 +37,17 @@
       <p>&copy; Mikael Brassman 2013</p>
       <p class="other-games-list hide"><small>Other games: </small><small class="other-games"></small></p>
     </footer>
+
+    <script type="text/html" id="main-menu-template">
+      <div class="screen menu-area">
+        <div class="main-menu btn-group-vertical">
+          <a href="javascript:void(0)" data-bind="click: newGame" class="btn btn-default">Play a game</a>
+        </ul>
+      </div>
+    </script>
     
     <script type="text/html" id="game-template">
-      <div class="game-area .col-md-4 .col-md-offset-4" data-bind="foreach: list">
+      <div class="screen game-area" data-bind="foreach: list">
         
         <div class="q" data-bind="css: { correct: wasCorrect, incorrect: wasIncorrect }">
           <label>

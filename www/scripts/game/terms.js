@@ -1,7 +1,12 @@
-define(['knockout', 'lodash', 'zepto'], function(ko, _, $) {
+define(['knockout', 'lodash', 'zepto', 'events'], function(ko, _, $, events) {
 
     var goToNext = function($target) {
-        $target.parents('.q').next().find('input').focus();
+        var next = $target.parents('.q').next().find('input');
+        if (next.length > 0) {
+            next.focus();
+        } else {
+            events.trigger('endGame');
+        }
     };
 
     function Term() {
@@ -40,7 +45,6 @@ define(['knockout', 'lodash', 'zepto'], function(ko, _, $) {
 
     function Terms() {
         this.list = ko.observableArray();
-        this.reset();
     }
 
     Terms.prototype.reset = function() {
@@ -49,12 +53,6 @@ define(['knockout', 'lodash', 'zepto'], function(ko, _, $) {
         for (i = 0; i < 10; i++) {
             this.list.push(new Term());
         }
-    };
-
-    Terms.prototype.initFocus = function() {
-        _.defer(function() {
-            $('input').eq(0).focus();
-        });
     };
 
     return new Terms();

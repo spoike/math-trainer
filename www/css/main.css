@@ -3,8 +3,18 @@ body {
   padding-bottom: 20px;
 }
 
-.game-area {
-  margin-top: 5px;
+.screen {
+  font-size: 32pt;
+  line-height: 1.2em;
+  margin-top: 1em;
+}
+
+.menu-area {
+  text-align: center;
+}
+
+.main-menu .btn {
+  font-size: 24pt;
 }
 
 .correct input {
@@ -16,7 +26,6 @@ body {
 }
 
 .q {
-  font-size: 32pt;
   margin: 0.5em auto;
   text-align: center;
 }

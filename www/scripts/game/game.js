@@ -1,5 +1,9 @@
-define(['zepto', 'random', 'log', 'terms', 'knockout'], function($, r, log, terms, ko) {
+define(['zepto', 'knockout', 'mainmenu'], function($, ko, mainmenu) {
 
-    ko.applyBindings(terms);
+    function Game() {
+        this.mainmenu = mainmenu;
+    }
+
+    ko.applyBindings(new Game().mainmenu);
 
 });
