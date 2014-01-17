@@ -1,0 +1,33 @@
+body {
+  padding-top: 50px;
+  padding-bottom: 20px;
+}
+
+.game-area {
+  margin-top: 5px;
+}
+
+.correct input {
+  background-color: limegreen;
+}
+
+.incorrect input {
+  background-color: pink;
+}
+
+.q {
+  font-size: 32pt;
+  margin: 0.5em auto;
+  text-align: center;
+}
+
+.q-term {
+  width: 4.5em;
+  display: inline-block;
+  text-align: right;
+}
+
+.q input {
+  width: 2em;
+  padding: 0.2em;
+}
