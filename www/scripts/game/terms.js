@@ -34,12 +34,13 @@ define(['knockout', 'lodash', 'zepto', 'events'], function(ko, _, $, events) {
         if (valStr.length >= term.answerLength) {
             if (val === term.answer) {
                 term.correct(true);
+                goToNext($target);
             }
             else {
                 term.correct(false);
+                $target.val('');
             }
             term.hasInput(true);
-            goToNext($target);
         }
     };
 
