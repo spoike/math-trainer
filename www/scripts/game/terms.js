@@ -10,8 +10,20 @@ define(['knockout', 'lodash', 'zepto', 'events'], function(ko, _, $, events) {
     };
 
     function getTermData(type) {
-        var data = {}, sum;
+        var data = {};
         switch (type) {
+            case Term.division:
+                data.operator = '÷';
+                data.b = _.random(1, 9);
+                data.answer = _.random(0, 9);
+                data.a = data.b * data.answer;
+                break;
+            case Term.multiplication:
+                data.operator = '×';
+                data.a = _.random(0, 9);
+                data.b = _.random(0, 9);
+                data.answer = data.a * data.b;
+                break;
             case Term.subtraction:
                 data.operator = '-';
                 data.a = _.random(0, 9);
@@ -34,6 +46,10 @@ define(['knockout', 'lodash', 'zepto', 'events'], function(ko, _, $, events) {
 
         if (chance <= 0.2) {
             selectedType = Term.subtraction;
+        } else if (chance <= 0.6) {
+            selectedType = Term.multiplication;
+        } else if (chance <= 0.7) {
+            selectedType = Term.division;
         }
         return new Term(getTermData(selectedType));
     };
