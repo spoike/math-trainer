@@ -27,8 +27,9 @@
 
   <div class="container">
 
-    <!-- ko template: { name: 'main-menu-template', 'if': !isPlaying() } --><!-- /ko -->
-    <!-- ko template: { name: 'game-template', data: terms, 'if': isPlaying, afterRender: initFocus } --><!-- /ko -->
+    <!-- ko foreach: screens -->
+      <!-- ko template: { name: templateName, data: data, 'if': isActive, afterRender: init() } --><!-- /ko -->
+    <!-- /ko -->
 
     <hr>
 
@@ -41,7 +42,9 @@
     <script type="text/html" id="main-menu-template">
       <div class="screen menu-area">
         <div class="main-menu btn-group-vertical">
-          <a href="javascript:void(0)" data-bind="click: newGame" class="btn btn-default">Play a game</a>
+          <a href="javascript:void(0)" data-bind="click: newEasyGame" class="btn btn-default">Play Normal Challenge</a>
+          <a href="javascript:void(0)" data-bind="click: newHardGame" class="btn btn-default">Play Difficult Challenge</a>
+          <a href="javascript:void(0)" data-bind="click: goToTimes" class="btn btn-default">Practice Times Table</a>
         </ul>
       </div>
     </script>
@@ -58,6 +61,17 @@
           </label>
         </div>
 
+      </div>
+    </script>
+
+    <script type="text/html" id="times-options-template">
+      <div class="screen menu-area">
+        <div class="main-menu btn-group" data-bind="foreach: options">
+            <a href="javascript:void(0)" data-bind="text: label, click: action" class="btn btn-default"></a>
+        </div><br/>
+        <div class="main-menu btn-group-vertical" style="margin-top: 0.5em">
+          <a href="javascript:void(0)" data-bind="click: goToMain" class="btn btn-default">Go back</a>
+        </div>
       </div>
     </script>
 

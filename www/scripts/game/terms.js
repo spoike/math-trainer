@@ -31,6 +31,11 @@ define(['knockout', 'lodash', 'zepto', 'events'], function(ko, _, $, events) {
                 data.answer = data.a - data.b;
                 break;
             case Term.addition:
+                data.operator = '+';
+                data.a = _.random(0, 9);
+                data.b = _.random(0, 9);
+                data.answer = data.a + data.b;
+                break;
             default:
                 data.operator = '+';
                 data.a = _.random(0, 9);
@@ -41,18 +46,21 @@ define(['knockout', 'lodash', 'zepto', 'events'], function(ko, _, $, events) {
         return data;
     }
 
-    function buildTerm() {
-        var chance = _.random(0, 1, true), selectedType = Term.addition;
-
-        if (chance <= 0.2) {
-            selectedType = Term.subtraction;
-        } else if (chance <= 0.6) {
-            selectedType = Term.multiplication;
-        } else if (chance <= 0.7) {
-            selectedType = Term.division;
-        }
+    function buildTerm(selectedType) {
+        selectedType = selectedType || Term.addition;
         return new Term(getTermData(selectedType));
-    };
+    }
+
+    function buildTimesTerm(times) {
+        var data = {}, useTimesOnB = _.random(0, 1) === 0;
+
+        data.operator = '×';
+        data.a = useTimesOnB ? _.random(0, 9) : times;
+        data.b = useTimesOnB ? times : _.random(0,9);
+        data.answer = data.a * data.b;
+
+        return new Term(data);
+    }
 
     function Term(data) {
         this.a = data.a;
@@ -98,12 +106,33 @@ define(['knockout', 'lodash', 'zepto', 'events'], function(ko, _, $, events) {
         this.list = ko.observableArray();
     }
 
-    Terms.prototype.reset = function() {
-        var i;
+    Terms.easy = 0;
+    Terms.hard = 1;
+
+    Terms.prototype.reset = function(difficulty) {
+        var left = 20, newList = [];
+        difficulty = difficulty || Terms.easy;
         this.list.removeAll();
-        for (i = 0; i < 10; i++) {
-            this.list.push(buildTerm());
+
+        if (difficulty === Terms.hard) {
+            _.times(4, function() { newList.push(buildTerm(Term.multiplication)); });
+            left -= 4;
+            _.times(1, function() { newList.push(buildTerm(Term.division)); });
+            left -= 1;
         }
+        _.times(2, function() { newList.push(buildTerm(Term.subtraction)); });
+        left -= 2;
+        _.times(left, function() { newList.push(buildTerm()); });
+
+        this.list(_.shuffle(newList));
+    };
+
+    Terms.prototype.resetTimes = function(times) {
+        var newList = [];
+
+        _.times(20, function() { newList.push(buildTimesTerm(times)); });
+
+        this.list(_.shuffle(newList));
     };
 
     return new Terms();
