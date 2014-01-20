@@ -1,12 +1,13 @@
 define(['knockout', 'lodash', 'zepto', 'events'], function(ko, _, $, events) {
 
     var goToNext = function($target) {
-        var next = $target.parents('.q').next().find('input');
+        var next = $target.parents('.q').next(), nextInput = next.find('input'), list = $('.q-list');
         if (next.length > 0) {
-            next.focus();
+            nextInput.focus();
         } else {
             events.trigger('endGame');
         }
+        list.css('margin-top', 150 - (next.index() * 100) + 'px');
     };
 
     function getTermData(type) {

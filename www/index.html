@@ -50,15 +50,17 @@
     </script>
     
     <script type="text/html" id="game-template">
-      <div class="screen game-area" data-bind="foreach: list">
-        
-        <div class="q" data-bind="css: { correct: wasCorrect, incorrect: wasIncorrect }">
-          <label>
-            <span class="q-term">
-              <span data-bind="text: termDisplay"></span> = 
-            </span>
-            <input type="text" maxlength="2" data-bind="event: { keyup: checkAnswer }">
-          </label>
+      <div class="screen game-area">
+
+        <div class="q-list" data-bind="foreach: list">
+          <div class="q" data-bind="css: { correct: wasCorrect, incorrect: wasIncorrect }">
+            <label>
+              <span class="q-term">
+                <span data-bind="text: termDisplay"></span> = 
+              </span>
+              <input type="text" maxlength="2" data-bind="event: { keyup: checkAnswer }">
+            </label>
+          </div>
         </div>
 
       </div>

@@ -40,3 +40,17 @@ body {
   width: 2em;
   padding: 0.2em;
 }
+
+.game-area {
+  border: solid 1px #ccc;
+  width: 400px;
+  height: 400px;
+  margin: 1em auto;
+  padding: 0 0;
+  overflow: hidden;
+}
+
+.q-list {
+  margin-top: 150px;
+  transition: all 0.2s ease;  
+}
