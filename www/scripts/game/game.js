@@ -22,30 +22,24 @@ define(['lodash', 'knockout', 'mainmenu', 'events', 'timesmenu'], function(_, ko
             }
         ];
 
-        events.on('startGame', _.bind(function() {
-            this.screens[0].isActive(false);
-            this.screens[1].isActive(true);
-            this.screens[2].isActive(false);
-        }, this));
+        events.on('startGame', _.bind(this.changeToScreen, this, 1));
 
-        events.on('endGame', _.bind(function() {
-            this.screens[0].isActive(true);
-            this.screens[1].isActive(false);
-            this.screens[2].isActive(false);
-        }, this));
+        events.on('endGame', _.bind(this.changeToScreen, this, 0));
 
-        events.on('goToMain', _.bind(function() {
-            this.screens[0].isActive(true);
-            this.screens[1].isActive(false);
-            this.screens[2].isActive(false);
-        }, this));
+        events.on('goToMain', _.bind(this.changeToScreen, this, 0));
 
-        events.on('goToTimes', _.bind(function() {
-            this.screens[0].isActive(false);
-            this.screens[1].isActive(false);
-            this.screens[2].isActive(true);
-        }, this));
+        events.on('goToTimes', _.bind(this.changeToScreen, this, 2));
     }
+
+    Game.prototype.changeToScreen = function(idx) {
+       var i;
+       if (idx >= this.screens.length) {
+           return;
+       }
+       for (i = 0; i < this.screens.length; i++) {
+           this.screens[i].isActive(idx === i);
+       } 
+    };
 
     ko.applyBindings(new Game());
 
