@@ -1,6 +1,14 @@
-define(['lodash', 'knockout', 'mainmenu', 'events', 'timesmenu'], function(_, ko, mainmenu, events, timesMenu) {
+define(['lodash', 'knockout', 'mainmenu', 'events', 'timesmenu', 'stopwatch'], function(_, ko, mainmenu, events, timesMenu, StopWatch) {
 
     function Game() {
+        this.stopWatch = new StopWatch();
+
+        this.lastTimeValue = ko.observable();
+        this.lastTime = ko.observable();
+
+        this.bestTimeValue = ko.observable(Number.POSITIVE_INFINITY);
+        this.bestTime = ko.observable();
+
         this.screens = [
             {
                 templateName: 'main-menu-template',
@@ -22,9 +30,21 @@ define(['lodash', 'knockout', 'mainmenu', 'events', 'timesmenu'], function(_, ko
             }
         ];
 
-        events.on('startGame', _.bind(this.changeToScreen, this, 1));
+        events.on('startGame', _.bind(function() {
+            this.changeToScreen(1);
+            this.stopWatch.start();
+        }, this));
 
-        events.on('endGame', _.bind(this.changeToScreen, this, 0));
+        events.on('endGame', _.bind(function() {
+            this.changeToScreen(0);
+            this.stopWatch.stop();
+            this.lastTimeValue(this.stopWatch.duration());
+            this.lastTime(this.stopWatch.formatDuration());
+            if (this.lastTimeValue() < this.bestTimeValue()) {
+                this.bestTimeValue(this.lastTimeValue());
+                this.bestTime(this.lastTime());
+            }
+        }, this));
 
         events.on('goToMain', _.bind(this.changeToScreen, this, 0));
 

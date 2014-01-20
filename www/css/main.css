@@ -41,6 +41,16 @@ body {
   padding: 0.2em;
 }
 
+.score-area {
+  font-size: 24px;
+  font-weight: bold;
+  padding: 1em;
+  border: 1px solid #ccc;
+  -webkit-border-radius: 5px
+  -moz-border-radius: 5px
+  border-radius: 5px: 
+}
+
 .game-area {
   border: solid 1px #ccc;
   width: 400px;
