@@ -1,8 +1,9 @@
-# Minesweeper 
+# Math Trainer 
 
-This is a game prototype I wrote that is implemented using AMD modules.
+This is an arithmetics training game that is implemented using AMD modules. It is
+reminiscent of Dr. Kawashima's Braintraining game for the Nintendo DS.
 
-You can play this with the github page for this project at http://spoike.github.io/minesweeper/
+You can play this with the github page for this project at http://spoike.github.io/math-trainer/
 
 ## How To Dev
 
