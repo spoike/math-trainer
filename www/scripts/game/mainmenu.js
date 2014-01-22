@@ -10,13 +10,13 @@ define(['knockout', 'lodash', 'terms', 'events', 'scores'], function(ko, _, term
     MainMenu.prototype.newEasyGame = function() {
         this.terms.reset(terms.easy);
         events.trigger('newEasyGame');
-        events.trigger('startGame');
+        events.trigger('startGame', ['easy']);
     };
 
     MainMenu.prototype.newHardGame = function() {
         this.terms.reset(terms.hard);
         events.trigger('newHardGame');
-        events.trigger('startGame');
+        events.trigger('startGame', ['hard']);
     };
 
     MainMenu.prototype.endGame = function() {
