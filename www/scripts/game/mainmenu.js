@@ -1,6 +1,7 @@
-define(['knockout', 'lodash', 'terms', 'events'], function(ko, _, terms, events) {
+define(['knockout', 'lodash', 'terms', 'events', 'scores'], function(ko, _, terms, events, scores) {
     
     function MainMenu() {
+        this.scores = scores;
         this.terms = terms;
 
         events.on('endGame', _.bind(this.endGame, this));

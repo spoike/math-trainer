@@ -47,9 +47,9 @@
           <a href="javascript:void(0)" data-bind="click: goToTimes" class="btn btn-default">Practice Times Table</a>
         </ul>
       </div>
-      <div class="screen score-area">
-        <p>Last time: <span data-bind="text: $root.lastTime"></span></p>
-        <p>Best time: <span data-bind="text: $root.bestTime"></span></p>
+      <div class="screen score-area" data-bind="with: scores">
+        <p>Last time: <span data-bind="text: lastTime"></span></p>
+        <p>Best time: <span data-bind="text: bestTime"></span></p>
       </div>
     </script>
     
