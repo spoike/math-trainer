@@ -136,6 +136,6 @@ define(['knockout', 'lodash', 'zepto', 'events'], function(ko, _, $, events) {
         this.list(_.shuffle(newList));
     };
 
-    return new Terms();
+    return Terms;
 
 });

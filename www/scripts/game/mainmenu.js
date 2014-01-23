@@ -1,20 +1,20 @@
-define(['knockout', 'lodash', 'terms', 'events', 'scores'], function(ko, _, terms, events, scores) {
+define(['knockout', 'lodash', 'terms', 'events', 'scores'], function(ko, _, Terms, events, scores) {
     
     function MainMenu() {
         this.scores = scores;
-        this.terms = terms;
+        this.terms = new Terms();
 
         events.on('endGame', _.bind(this.endGame, this));
     }
 
     MainMenu.prototype.newEasyGame = function() {
-        this.terms.reset(terms.easy);
+        this.terms.reset(Terms.easy);
         events.trigger('newEasyGame');
         events.trigger('startGame', ['easy']);
     };
 
     MainMenu.prototype.newHardGame = function() {
-        this.terms.reset(terms.hard);
+        this.terms.reset(Terms.hard);
         events.trigger('newHardGame');
         events.trigger('startGame', ['hard']);
     };
