@@ -2,20 +2,18 @@ define(['knockout', 'lodash', 'terms', 'events', 'scores'], function(ko, _, Term
     
     function MainMenu() {
         this.scores = scores;
-        this.terms = new Terms();
+        this.terms = Terms.getInstance();
 
         events.on('endGame', _.bind(this.endGame, this));
     }
 
     MainMenu.prototype.newEasyGame = function() {
         this.terms.reset(Terms.easy);
-        events.trigger('newEasyGame');
         events.trigger('startGame', ['easy']);
     };
 
     MainMenu.prototype.newHardGame = function() {
         this.terms.reset(Terms.hard);
-        events.trigger('newHardGame');
         events.trigger('startGame', ['hard']);
     };
 

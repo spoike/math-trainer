@@ -26,7 +26,7 @@ define(['knockout', 'events', 'stopwatch'], function(ko, events, StopWatch) {
             easy: new GameScore('easy'),
             hard: new GameScore('hard')
         };
-
+        this.initTimesGameScores();
 
         events.on('startGame', _.bind(function(difficultyLabel) {
             this.currentDifficulty = this.byDifficulty[difficultyLabel];
@@ -37,8 +37,15 @@ define(['knockout', 'events', 'stopwatch'], function(ko, events, StopWatch) {
             this.stopWatch.stop();
             this.currentDifficulty.updateScore(this.stopWatch);
         }, this));
-
     }
+
+    ScoreBoard.prototype.initTimesGameScores = function() {
+        var i;
+
+        for (i = 1; i <= 9; i++) {
+            this.byDifficulty['multiply' + i + 'x'] = new GameScore(i + 'x multiplication');
+        }
+    };
 
     return new ScoreBoard();
 });

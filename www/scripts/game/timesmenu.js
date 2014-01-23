@@ -1,7 +1,7 @@
-define(['knockout', 'lodash', 'terms', 'events'], function(ko, _, terms, events) {
+define(['knockout', 'lodash', 'terms', 'events'], function(ko, _, Terms, events) {
 
     function TimesMenu() {
-        this.terms = terms;
+        this.terms = Terms.getInstance();
         this.options = [];
         this.initOptions();
     }
@@ -18,8 +18,8 @@ define(['knockout', 'lodash', 'terms', 'events'], function(ko, _, terms, events)
 
     TimesMenu.prototype.setUpTerms = function(times) {
         this.terms.resetTimes(times);
-        events.trigger('newTimesGame', [times]);
-        events.trigger('startGame');
+
+        events.trigger('startGame', ['multiply' + times + 'x']);
     };
 
     TimesMenu.prototype.goToMain = function() {
