@@ -1,6 +1,6 @@
 define(['knockout', 'events', 'stopwatch'], function(ko, events, StopWatch) {
 
-    function GameScore(label) {
+    function TimeEntry(label) {
         this.label = label;
 
         this.lastTimeValue = ko.observable();
@@ -10,7 +10,7 @@ define(['knockout', 'events', 'stopwatch'], function(ko, events, StopWatch) {
         this.bestTime = ko.observable();
     }
 
-    GameScore.prototype.updateScore = function(stopWatch) {
+    TimeEntry.prototype.updateScore = function(stopWatch) {
         this.lastTimeValue(stopWatch.duration());
         this.lastTime(stopWatch.formatDuration());
         if (this.lastTimeValue() < this.bestTimeValue()) {
@@ -19,12 +19,12 @@ define(['knockout', 'events', 'stopwatch'], function(ko, events, StopWatch) {
         }
     };
 
-    function ScoreBoard() {
+    function TimesBoard() {
         this.stopWatch = new StopWatch();
 
         this.byDifficulty = {
-            easy: new GameScore('easy'),
-            hard: new GameScore('hard')
+            easy: new TimeEntry('easy'),
+            hard: new TimeEntry('hard')
         };
         this.initTimesGameScores();
 
@@ -39,13 +39,13 @@ define(['knockout', 'events', 'stopwatch'], function(ko, events, StopWatch) {
         }, this));
     }
 
-    ScoreBoard.prototype.initTimesGameScores = function() {
+    TimesBoard.prototype.initTimesGameScores = function() {
         var i;
 
         for (i = 1; i <= 9; i++) {
-            this.byDifficulty['multiply' + i + 'x'] = new GameScore(i + 'x multiplication');
+            this.byDifficulty['multiply' + i + 'x'] = new TimeEntry(i + 'x multiplication');
         }
     };
 
-    return new ScoreBoard();
+    return new TimesBoard();
 });
