@@ -13,11 +13,11 @@ define([], function() {
     };
 
     StopWatch.prototype.duration = function() {
-        return Math.floor((this.end - this.offset) / 1000);
+        return Math.floor(this.end - this.offset);
     };
 
     StopWatch.prototype.formatDuration = function() {
-        var time = this.duration(),
+        var time = this.duration() / 1000,
             mins = Math.floor(time / 60),
             secs = time % 60;
 

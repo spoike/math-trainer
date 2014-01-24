@@ -1,4 +1,4 @@
-define(['lodash', 'knockout', 'mainmenu', 'events', 'timesmenu'], function(_, ko, mainmenu, events, timesMenu) {
+define(['lodash', 'knockout', 'mainmenu', 'events', 'timesmenu', 'log'], function(_, ko, mainmenu, events, timesMenu, log) {
 
     function Game() {
         this.screens = [
@@ -42,5 +42,12 @@ define(['lodash', 'knockout', 'mainmenu', 'events', 'timesmenu'], function(_, ko
     };
 
     ko.applyBindings(new Game());
+
+    _.defer(function() {
+        if (window.performance && window.performance.timing) {
+            var gameLoaded = Date.now() - window.performance.timing.navigationStart;
+            log.timing('Game Loaded', gameLoaded);
+        }
+    });
 
 });
