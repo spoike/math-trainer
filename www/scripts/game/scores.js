@@ -1,4 +1,4 @@
-define(['knockout', 'events', 'stopwatch'], function(ko, events, StopWatch) {
+define(['knockout', 'events', 'stopwatch', 'log'], function(ko, events, StopWatch, log) {
 
     function TimeEntry(label) {
         this.label = label;
@@ -29,13 +29,17 @@ define(['knockout', 'events', 'stopwatch'], function(ko, events, StopWatch) {
         this.initTimesGameScores();
 
         events.on('startGame', _.bind(function(difficultyLabel) {
+            this.currentDifficultyLabel = difficultyLabel;
             this.currentDifficulty = this.byDifficulty[difficultyLabel];
             this.stopWatch.start();
+            log.event('Start Game', difficultyLabel);
         }, this));
 
         events.on('endGame', _.bind(function() {
             this.stopWatch.stop();
             this.currentDifficulty.updateScore(this.stopWatch);
+            log.event('Finish Game', this.currentDifficultyLabel);
+            log.timing('Finish Game', this.stopWatch.duration(), this.currentDifficultyLabel);
         }, this));
     }
 
