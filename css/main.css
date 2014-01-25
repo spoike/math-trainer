@@ -1,0 +1,70 @@
+body {
+  padding-top: 50px;
+  padding-bottom: 20px;
+}
+
+.screen {
+  font-size: 32pt;
+  line-height: 1.2em;
+  margin-top: 1em;
+}
+
+.menu-area {
+  text-align: center;
+}
+
+.main-menu .btn {
+  font-size: 24pt;
+}
+
+.correct input {
+  background-color: limegreen;
+}
+
+.incorrect input {
+  background-color: pink;
+}
+
+.q {
+  margin: 0.5em auto;
+  text-align: center;
+}
+
+.q-term {
+  width: 4.5em;
+  display: inline-block;
+  text-align: right;
+}
+
+.q input {
+  width: 2em;
+  padding: 0.2em;
+}
+
+.score-area {
+  font-size: 24px;
+  font-weight: bold;
+  padding: 1em;
+  border: 1px solid #ccc;
+  -webkit-border-radius: 5px
+  -moz-border-radius: 5px
+  border-radius: 5px: 
+}
+
+.game-area {
+  border: solid 1px #ccc;
+  width: 400px;
+  height: 400px;
+  margin: 1em auto;
+  padding: 0 0;
+  overflow: hidden;
+}
+
+.q-list {
+  margin-top: 150px;
+  -webkit-transition: all 0.15s ease-in;
+  -moz-transition: all 0.15s ease-in;
+  -ms-transition: all 0.15s ease-in;
+  -o-transition: all 0.15s ease-in;
+  transition: all 0.15s ease-in; 
+}

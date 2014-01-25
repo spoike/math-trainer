@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Math</title>
+  <meta name="description" content="A simple minesweeper game">
+  <meta name="viewport" content="width=device-width">
+
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="javascript:void(0)">Math Challenge</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <!-- ko foreach: screens -->
+      <!-- ko template: { name: templateName, data: data, 'if': isActive, afterRender: init() } --><!-- /ko -->
+    <!-- /ko -->
+
+    <hr>
+
+    <footer>
+      <p>Source code at <a href="https://github.com/spoike/minesweeper">GitHub</a></p>
+      <p>&copy; Mikael Brassman 2013</p>
+      <p class="other-games-list hide"><small>Other games: </small><small class="other-games"></small></p>
+    </footer>
+
+    <script type="text/html" id="main-menu-template">
+      <div class="screen menu-area">
+        <div class="main-menu btn-group-vertical">
+          <a href="javascript:void(0)" data-bind="click: newEasyGame" class="btn btn-default">Play Normal Challenge</a>
+          <a href="javascript:void(0)" data-bind="click: newHardGame" class="btn btn-default">Play Difficult Challenge</a>
+          <a href="javascript:void(0)" data-bind="click: goToTimes" class="btn btn-default">Practice Times Table</a>
+        </ul>
+      </div>
+      <div class="screen score-area">
+        <h2>Normal</h2>
+        <!-- ko with: scores.byDifficulty.easy -->
+        <p>Last time: <span data-bind="text: lastTime"></span></p>
+        <p>Best time: <span data-bind="text: bestTime"></span></p>
+        <!-- /ko -->
+        <h2>Difficult</h2>
+        <!-- ko with: scores.byDifficulty.hard -->
+        <p>Last time: <span data-bind="text: lastTime"></span></p>
+        <p>Best time: <span data-bind="text: bestTime"></span></p>
+        <!-- /ko -->
+      </div>
+    </script>
+    
+    <script type="text/html" id="game-template">
+      <div class="screen game-area">
+
+        <div class="q-list" data-bind="foreach: list">
+          <div class="q" data-bind="css: { correct: wasCorrect, incorrect: wasIncorrect }">
+            <label>
+              <span class="q-term">
+                <span data-bind="text: termDisplay"></span> = 
+              </span>
+              <input type="text" maxlength="2" data-bind="event: { keyup: checkAnswer }">
+            </label>
+          </div>
+        </div>
+
+      </div>
+    </script>
+
+    <script type="text/html" id="times-options-template">
+      <div class="screen menu-area">
+        <div class="main-menu btn-group" data-bind="foreach: options">
+            <a href="javascript:void(0)" data-bind="text: label, click: action" class="btn btn-default"></a>
+        </div><br/>
+        <div class="main-menu btn-group-vertical" style="margin-top: 0.5em">
+          <a href="javascript:void(0)" data-bind="click: goToMain" class="btn btn-default">Go back</a>
+        </div>
+      </div>
+    </script>
+
+    <script data-main="scripts/main.js" src="scripts/require.js"></script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-30707021-2', 'spoike.github.io');
+      ga('send', 'pageview');
+    </script>
+  </div>
+
+</body>
+</html>
