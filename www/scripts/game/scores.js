@@ -8,6 +8,8 @@ define(['knockout', 'events', 'stopwatch', 'log'], function(ko, events, StopWatc
 
         this.bestTimeValue = ko.observable(Number.POSITIVE_INFINITY);
         this.bestTime = ko.observable();
+
+        this.loadScore();
     }
 
     TimeEntry.prototype.updateScore = function(stopWatch) {
@@ -17,7 +19,34 @@ define(['knockout', 'events', 'stopwatch', 'log'], function(ko, events, StopWatc
             this.bestTimeValue(this.lastTimeValue());
             this.bestTime(this.lastTime());
         }
+        this.saveScore();
     };
+
+    TimeEntry.prototype.loadScore = function() {
+        var times = localStorage.getItem('time_' + this.label), timesObj;
+        if (!times) {
+            return;
+        }
+        timesObj = JSON.parse(times);
+        this.bestTimeValue(timesObj.bestTime.val);
+        this.bestTime(timesObj.bestTime.formatted);
+        this.lastTimeValue(timesObj.lastTime.val);
+        this.lastTime(timesObj.lastTime.formatted);
+    };
+
+    TimeEntry.prototype.saveScore = function() {
+        var timesObj = {
+            bestTime: {
+                val: this.bestTimeValue(),
+                formatted: this.bestTime()
+            },
+            lastTime: {
+                val: this.lastTimeValue(),
+                formatted: this.lastTime()
+            }
+        }
+        localStorage.setItem('time_' + this.label, JSON.stringify(timesObj));
+    }
 
     function TimesBoard() {
         this.stopWatch = new StopWatch();
