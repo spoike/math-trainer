@@ -44,9 +44,9 @@ define(['knockout', 'events', 'stopwatch', 'log'], function(ko, events, StopWatc
                 val: this.lastTimeValue(),
                 formatted: this.lastTime()
             }
-        }
+        };
         localStorage.setItem('time_' + this.label, JSON.stringify(timesObj));
-    }
+    };
 
     function TimesBoard() {
         this.stopWatch = new StopWatch();
