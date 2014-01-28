@@ -103,6 +103,16 @@ define(['knockout', 'lodash', 'zepto', 'events'], function(ko, _, $, events) {
         }
     };
 
+    Term.prototype.acceptNumericKey = function(term, evt) {
+        var code = evt.keyCode;
+        // Accept the key if it is a number key
+        // i.e. '0': 48, '1': 49, ..., '9': 57
+        if (code >= 48 && code <= 57) {
+            return true;
+        }
+        return false;
+    };
+
     function Terms() {
         this.list = ko.observableArray();
     }
