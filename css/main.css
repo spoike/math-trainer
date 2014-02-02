@@ -39,6 +39,12 @@ body {
 .q input {
   width: 2em;
   padding: 0.2em;
+  -moz-appearance: textfield;
+}
+.q input::-webkit-outer-spin-button,
+.q input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .score-area {
